@@ -1,23 +1,23 @@
 # Little Portrait AI - Server
 
-A Node.js/Express backend for AI portrait generation using Replicate.
+Express backend for AI portrait generation using Replicate's Flux model.
 
 ## Tech Stack
 
-- **Node.js** with Express
-- **Replicate API** (Flux Kontext Pro model)
-- **Cloudinary** for image hosting
-- **Multer** for file uploads
+- **Node.js + Express**
+- **Replicate API** - Flux Kontext Pro model
+- **Cloudinary** - Image hosting
+- **Multer** - File uploads
 
-## Getting Started
+## Setup
 
 1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Create `.env` and add:
-   ```
+2. Create `.env` file:
+   ```env
    PORT=5000
    REPLICATE_API_TOKEN=your_replicate_token
    CLOUDINARY_CLOUD_NAME=your_cloud_name
@@ -30,15 +30,25 @@ A Node.js/Express backend for AI portrait generation using Replicate.
    npm run dev
    ```
 
-## API Endpoints
+## API
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| POST | `/api/personalize` | Upload image and generate AI portrait |
+### POST `/api/personalize`
 
-## How It Works
+Generate AI portrait from uploaded image.
 
-1. Client uploads an image
-2. Image is stored on Cloudinary
-3. Cloudinary URL is sent to Replicate's Flux model
-4. Generated portrait URL is returned to client
+**Request:**
+- `image` (file) - Image to transform
+- `prompt` (text, optional) - Custom style prompt
+
+**Response:**
+```json
+{
+  "success": true,
+  "image": "https://cloudinary.com/...",
+  "result": "https://replicate.delivery/..."
+}
+```
+
+## Default Prompt
+
+If no custom prompt is provided, the default 3D Pixar/DreamWorks animation style is used.
