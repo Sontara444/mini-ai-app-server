@@ -1,3 +1,84 @@
+# -----------------------------
+# ENVIRONMENT VARIABLES
+# -----------------------------
 .env
-/node_modules
+.env.local
+.env.development
+.env.production
+.env.test
 
+# -----------------------------
+# NODE MODULES
+# -----------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun.lockb
+
+# -----------------------------
+# LOG FILES
+# -----------------------------
+logs/
+*.log
+*.log.*
+debug.log
+error.log
+
+# -----------------------------
+# BUILD OUTPUT
+# -----------------------------
+dist/
+build/
+tmp/
+temp/
+
+# -----------------------------
+# OS & EDITOR FILES
+# -----------------------------
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -----------------------------
+# CACHE FILES
+# -----------------------------
+.cache/
+.next/
+out/
+coverage/
+nyc_output/
+
+# -----------------------------
+# UPLOADS & GENERATED FILES
+# (Only ignore if you don't need them in Git)
+# -----------------------------
+uploads/
+public/uploads/
+uploads_tmp/
+
+# -----------------------------
+# REPLICATE / CLOUDINARY TEMP
+# -----------------------------
+*.tmp
+temp_images/
+cloudinary_temp/
+
+# -----------------------------
+# PM2 / PROCESS MANAGER FILES
+# -----------------------------
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# -----------------------------
+# OPTIONAL: Ignore local database files
+# (If using sqlite or local storage)
+# -----------------------------
+*.sqlite
+*.sqlite3

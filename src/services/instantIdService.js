@@ -1,4 +1,5 @@
 const Replicate = require("replicate");
+require("dotenv").config();
 
 const replicate = new Replicate({
     auth: process.env.REPLICATE_API_TOKEN,
@@ -6,34 +7,26 @@ const replicate = new Replicate({
 
 async function generatePortrait(imageUrl) {
     try {
-        console.log("✨ Sending image to Instant-ID model:", imageUrl);
 
-        const output = await replicate.run(
-            "zsxkib/instant-id:2e4785a4d80dadf580077b2244c8d7c05d8e3faac04a04c02d8e099dd2876789",
-            {
-                input: {
-                    image: imageUrl,
+        const input = {
+            prompt: `
+                        A super cute 3D animated toddler girl, large expressive eyes, soft smooth skin,
+                        Pixar / DreamWorks animation style, high-detail facial features, warm soft lighting,
+                        tiny nose, round cheeks, delicate eyelashes, playful smile, short dark hair with cute hairband,
+                        warm outdoor background, ultra-clean render, cinematic depth of field,
+                        colorful and joyful atmosphere, highly detailed 3D character render, toy-like stylization.
+`,
+            input_image: imageUrl,
+            aspect_ratio: "match_input_image",
+            output_format: "jpg",
+            safety_tolerance: 2,
+            prompt_upsampling: false
+        };
 
-                    // You *must* provide a prompt
-                    prompt:
-                        "3D render style illustration portrait of this child, pixar style, disney style, cute, high quality, highly detailed, soft lighting, 8k",
+        const output = await replicate.run("black-forest-labs/flux-kontext-pro", { input });
 
-                    // SAFE defaults for this Instant-ID version
-                    pose_image: "",
-                    sdxl_weights: "protovision-xl-high-fidel",
-                    guidance_scale: 5,
-                    negative_prompt:
-                        "(lowres, low quality, worst quality:1.2), watermark, painting, glitch, deformed, ugly, photo, realistic"
-                }
-            }
-        );
+        return output.url();
 
-        console.log("AI Output URLs:", output);
-
-        // output is an array of file objects
-        const resultUrl = output[0].url();
-
-        return [resultUrl];
     } catch (err) {
         console.error("❌ AI Error:", err);
         if (err.response) {
