@@ -17,7 +17,9 @@ exports.personalize = async (req, res) => {
             throw new Error("Cloudinary upload failed");
         }
 
-        const result = await generatePortrait(uploaded.secure_url);
+        const customPrompt = req.body.prompt || null;
+        console.log("📝 Custom prompt received:", customPrompt);
+        const result = await generatePortrait(uploaded.secure_url, customPrompt);
 
         return res.json({
             success: true,
